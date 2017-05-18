@@ -1,0 +1,71 @@
+<Quant_Factor_Sample>
+    <Eretic_Methods>
+        <Eretic method="Plasma">
+            <Eretic_Sample>QuantRefC</Eretic_Sample>
+            <Artificial_Eretic_Position>15</Artificial_Eretic_Position>
+            <Artificial_Eretic_Line_Width>0.75</Artificial_Eretic_Line_Width>
+            <Artificial_Eretic_Concentration>10</Artificial_Eretic_Concentration>
+            <Parameter_Set>QUANTREF600C_310K</Parameter_Set>
+            <Magnetic_Field>600</Magnetic_Field>
+            <Eretic_Calibration>
+                <Eretic_Calibration_Start>2013/11/5 18:14:38</Eretic_Calibration_Start>
+                <Eretic_Calibration_End/>
+                <Eretic_Sample_Tube ID="QuantRefC-50WD-00020"/>
+                <Eretic_Factor>3753.39704543</Eretic_Factor>
+                <Max_Deviation_Compound>0.0</Max_Deviation_Compound>
+                <Experiment_Description>
+                    <Instrument>CZC2524DVT</Instrument>
+                    <Probehead>5 mm PABBI 1H/D-BB Z-GRD Z814601/0070</Probehead>
+                    <Temperature/>
+                    <Temperature_min>309.1012</Temperature_min>
+                    <Temperature_max>309.5012</Temperature_max>
+                    <Solvent>Plasma</Solvent>
+                    <Pulprog>noesygppr1d</Pulprog>
+                    <SWH>18028.85</SWH>
+                    <Dataset>C:\NMRData\data\References\nmr\QuantRefC-50WD-00020-310K-2013-11-05-17-43\10\pdata\1\1r</Dataset>
+                    <Durations>
+                        <D1>4</D1>
+                        <D8>0.01</D8>
+                    </Durations>
+                    <Powerlevel>
+                        <PLDB1>-11.23852</PLDB1>
+                        <PLDB9>47.76937</PLDB9>
+                    </Powerlevel>
+                    <Preset_RF>25.0</Preset_RF>
+                    <Pulses>
+                        <P1>11.21</P1>
+                    </Pulses>
+                    <NS>32</NS>
+                    <DS>4</DS>
+                    <TD>98304</TD>
+                    <SI>131072</SI>
+                    <RG>84.66</RG>
+                </Experiment_Description>
+            </Eretic_Calibration>
+        </Eretic>
+        <Application Name="PlasmaScreening">
+            <Application_Parameter>
+                <Eretic_Factor>4157.66609479</Eretic_Factor>
+                <Experiment_Description>
+                    <Instrument>CZC2524DVT</Instrument>
+                    <Temperature>309.2999</Temperature>
+                    <Solvent>Plasma</Solvent>
+                    <Pulprog>noesygppr1d</Pulprog>
+                    <Dataset>C:\Bruker\TopSpin3.2.3\data\nmrsu\nmr\Project_plasma_Rack1_SLT_161213\10\pdata\1\1r</Dataset>
+                    <Powerlevel>
+                        <PLDB1>-11.23852</PLDB1>
+                        <PLDB9>48.65787</PLDB9>
+                    </Powerlevel>
+                    <Pulses>
+                        <P1>10.12</P1>
+                    </Pulses>
+                    <NS>32</NS>
+                    <DS>4</DS>
+                    <TD>98304</TD>
+                    <SI>131072</SI>
+                    <RG>84.66</RG>
+                </Experiment_Description>
+            </Application_Parameter>
+        </Application>
+    </Eretic_Methods>
+</Quant_Factor_Sample>

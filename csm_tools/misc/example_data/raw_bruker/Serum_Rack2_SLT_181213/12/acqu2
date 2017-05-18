@@ -1,0 +1,22 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.2
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 5	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= nmrsu
+$$ 2013-12-18 20:42:15.615 +0000  nmrsu@CZC2524DVT
+$$ C:/Bruker/TopSpin3.2.3/data/nmrsu/nmr/Project_plasma_Rack2_SLT_181213/12/acqu2
+$$ process C:\Bruker\TopSpin3.2.3\prog\au\bin\user\au_plasma_jres.exe
+##$ACQT0= 0
+##$BF1= 600.59
+##$FnMODE= 1
+##$NUC1= <1H>
+##$NusJSP= 0
+##$NusT2= 1
+##$NusTD= 0
+##$O1= 2823.70000002174
+##$SFO1= 600.5928237
+##$SW= 0.1298716816486
+##$SW_h= 78.0597870461399
+##$TD= 40
+##END=

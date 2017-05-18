@@ -1,0 +1,27 @@
+##TITLE= Parameter file, TOPSPIN		Version 3.2
+##JCAMPDX= 5.0
+##DATATYPE= Parameter Values
+##NPOINTS= 1	$$ modification sequence number
+##ORIGIN= Bruker BioSpin GmbH
+##OWNER= nmrsu
+$$ 2013-12-16 15:12:30.574 +0000  nmrsu@CZC2524DVT
+$$ C:/Bruker/TopSpin3.2.3/prog/curdir/changer/inmrchanger/Dec16-2013-1511-nmrsu/401/data/nmr/Project_plasma_Rack1_SLT_161213/12/pdata/1/clevels
+$$ process C:\Bruker\TopSpin3.2.3\prog\mod\xwish3.exe
+##$LEVELS= (0..255)
+10548.2 12657.8 15189.4 18227.3 21872.7 26247.3 31496.8 37796.1 45355.3
+54426.4 65311.7 78374 94048.8 112858.6 135430.3 162516.3 195019.6 234023.5
+280828.2 336993.9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+##$LEVSIGN= 1
+##$MAXLEV= 20
+##$METHOD= 0
+##$NEGBASE= -10548.2
+##$NEGINCR= 1.2
+##$POSBASE= 10548.2
+##$POSINCR= 1.2
+##END=

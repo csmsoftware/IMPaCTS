@@ -16,7 +16,7 @@ Matlab 2016a & the Statistics Toolbox.
 
 When using this software please use the following Zenodo DOI.
 
-
+[![DOI](https://zenodo.org/badge/91718494.svg)](https://zenodo.org/badge/latestdoi/91718494)
 
 ### Licence
 

@@ -203,7 +203,7 @@ classdef csm_import_spectra_progenesis_qi < csm_import_spectra_base
             
             X = X_matrix';
             
-            obj.spectra = csm_ms_spectra(X,'retentionTime_mz',obj.ms_features.features('Compound'),'sample_ids',sample_ids,'is_continuous',false,'ms_features',obj.ms_features);
+            obj.spectra = csm_ms_spectra(X,obj.ms_features.features('Compound'),'retentionTime_mz','sample_ids',sample_ids,'is_continuous',false,'ms_features',obj.ms_features);
             
         end    
         

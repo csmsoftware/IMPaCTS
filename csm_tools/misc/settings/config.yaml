@@ -1,2 +1,2 @@
-{toolbox_version: '1.0', test_data_path: none, toolbox_path: none, workspace_path: none,
+{toolbox_version: 1.0.3, test_data_path: none, toolbox_path: none, workspace_path: none,
   unit_test_path: none}

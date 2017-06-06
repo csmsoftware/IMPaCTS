@@ -55,6 +55,12 @@ classdef csm_ms_features
                 
                 field_name = strrep( field_name, '-', '_' );
                 
+                field_name = strrep( field_name, '(', '' );
+                
+                field_name = strrep( field_name, ')', '' );
+                
+                field_name = strrep( field_name, '%', '_percent' );
+                
                 colNames{ end + 1 } = field_name;
                 
                 for p = 1 : size(feature,2)
@@ -66,7 +72,7 @@ classdef csm_ms_features
             end
             
             table = cell2table( cellArr );
-            
+                        
             table.Properties.VariableNames = colNames;
             
         end   

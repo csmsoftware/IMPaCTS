@@ -20,7 +20,7 @@ classdef csm_import_raw_nmr
 %	spectra_bounds : (1*2) Range of ppm (min and max). Default [-1 10].
 %	spectra_size_2D : (1*1) Number of points of 2D ppm. Default 20000.
 %	spectra_bounds_2D : (1*2) Range of 2D ppm (min and max). Default [-1 10].
-%		 : (str) Which peak to use for LW calc, uses 'lactate' for plasma and 'TSP' for urine. Default 'TSP'. 
+%	LW_peak	 : (str) Which peak to use for LW calc, uses 'lactate' for plasma and 'TSP' for urine. Default 'TSP'. 
 %	LW_threshold : (1*1) Linewidth threshold. Default 1.4.
 %
 % Returns:
@@ -148,6 +148,7 @@ classdef csm_import_raw_nmr
         peak_width_output_diff_edited;
         audit_info;
         set_options;
+        build_empty_object;
 
     end
 
@@ -162,6 +163,10 @@ classdef csm_import_raw_nmr
             end
 
             obj = setExperimentInfo( obj, varargin );
+            
+            if obj.build_empty_object
+                return;
+            end    
             
             obj = buildDefaults( obj );
             
@@ -302,6 +307,12 @@ classdef csm_import_raw_nmr
                     obj.sample_metadata_path = fix_filesep( experiment_info.sample_metadata_path );
                     obj.nmr_experiment_info_path = fix_filesep( experiment_info.nmr_experiment_info_path );
                     obj.nmr_calibration_info_path = fix_filesep( experiment_info.nmr_calibration_info_path );
+                    found = true;
+                    break;
+                
+                elseif strcmp( varargin{1}{k},'build_empty_object')
+                    
+                    obj.build_empty_object = true;
                     found = true;
                     break;
                     

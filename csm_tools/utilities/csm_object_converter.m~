@@ -139,6 +139,145 @@ classdef csm_object_converter
 
         end
 
+        % Recursively create an object from an exported struct.
+        % Uses the output of csm_export_object.toStruct()
+        function [output] = toObject( structure )
+            
+            % If its a normal datatype (Single), just return the value
+            if csm_object_converter.isSingleDatatype( structure )
+
+                output = structure;
+
+                return;
+
+            end
+
+            % Get the properties
+
+%			if isa( structure, 'struct' )
+                
+ %               property_list = fieldnames( structure );
+                
+  %          elseif isa( structure, 'containers.Map' )
+                
+   %             property_list = keys( structure );
+
+                    % Else is a csm object.
+    %		else
+
+    %			property_list = properties( structure );
+
+    %		end
+
+
+
+            if exist( structure.csm_class_type, 'class' )
+                
+                disp(strcat( "Converting ", structure.csm_class_type))
+
+                % Instantiate an empty object
+                eval( strcat( 'output = ', structure.csm_class_type ,'();'));
+
+                fields = fieldnames( structure );
+                
+                for i = 1 : numel( fields )
+                    
+                    disp(fields{i});
+                    
+                    if strcmp(fields{i},'unique_id_order')
+                        
+                       break_here = 1; 
+                    end
+                    
+                    % If its a struct
+                    if isstruct( structure.( fields{ i } ) )
+                        
+                        % Check if its a csm object, if so, nested call
+                        if csm_object_converter.isCsmObject( structure.csm_subclass_info, fields{ i } )
+                            
+                            % Does it have a setProperty method?
+                         %   if csm_object_converter.justAssignIt( structure.( fields{ i } ))
+                            
+                         %       output = structure.(fields{i});
+                        
+                         %   else 
+
+                                output = output.setProperty( fields{ i }, csm_object_converter.toObject( structure.( fields{ i } ) ) );
+                                
+                         %   end    
+
+                        else
+                            
+                             if csm_object_converter.doNotConvert( structure.( fields{ i } ) )
+                           
+                                output = structure.(fields{i});
+        
+                             else    
+    
+                                output = output.setProperty( fields{ i }, csm_object_converter.toObject(structure.( fields{ i } ) ) );
+                                
+                             end   
+
+                        end
+
+                    % It's a map
+                    elseif isa( structure.( fields{ i } ),  'containers.Map' )
+                    
+                        new_map = containers.Map;
+
+                        old_map = structure.( fields{ i } );
+
+                        map_keys =  keys( old_map );
+
+                        for p = 1 : length( map_keys )
+
+                            map_value = old_map( map_keys{ p } );
+
+                            new_map( map_keys{ p } ) = csm_object_converter.toObject( map_value );
+
+                        end
+                        
+                        % Does it have a setProperty method?
+%                        if csm_object_converter.doNotConvert( structure.( fields{ i } ))
+
+                            output = new_map;
+
+ %                       else 
+
+  %                          output = output.setProperty( fields{ i }, new_map );
+                            
+   %                     end    
+
+                    elseif csm_object_converter.isSingleDatatype( structure.(fields{i}) )
+                        
+                        output = csm_object_converter.toObject(structure.( fields{ i } ) );
+                        
+                  %      output = output.setProperty( fields{ i }, csm_object_converter.toObject(structure.( fields{ i } ) ) );
+                        
+                   
+                    % otherwise just set the field
+                    else
+                        
+                   %     if csm_object_converter.doNotConvert( structure.( fields{ i } ) )
+                           
+                   %         output = structure.(fields{i});
+                            
+                   %     else    
+
+                            output = output.setProperty( fields{ i }, csm_object_converter.toObject(structure.( fields{ i } ) ));
+                    %    end
+                     end
+
+                end
+
+            else
+
+                error( 'This struct cannot be converted into a csm object' );
+
+            end
+
+        end
+
         % Check if this is a CSM Toolbox Class
         % Simply examines the object, and whether it is a standard data type
         % Uses evals because of the dynamic object property names.
@@ -223,38 +362,8 @@ classdef csm_object_converter
                 it_is = true;
 
             end
-            
-            if isa( variable, 'dataset' )
-                
-                it_is = true;
-                
-            end  
-            
-            if isa( variable, 'table' )
-                
-                it_is = true;
-                
-            end  
         
         end
-        
-        function [it_is] = inIgnoreList( structure )
-            
-            it_is = false;
-            
-            if isstruct(structure) && isfield(structure,'csm_class_type')
-                
-               class_name = structure.csm_class_type;
-               
-               if strcmp(class_name,'inputParser')
-                   
-                   it_is = true;
-                   
-               end    
-                
-            end    
-            
-        end    
 
         % Checks if its in the map container, and then whether its a csm class
         function [it_is] = isCsmObject( csm_subclass_info, property_name )
@@ -284,6 +393,24 @@ classdef csm_object_converter
 
         end
         
+        function [bool] = doNotConvert( csm_class_struct )
+            
+            bool = false;
+            
+            if isstruct(csm_class_struct)
+            
+                if isfield( csm_class_struct, 'csm_class_type')
+                
+                    if strcmp( csm_class_struct.csm_class_type, 'inputParser' )
+                
+                        bool = true;
+               
+                    end
+                end
+                
+            end    
+            
+        end 
         
         function [property_accessor] = buildPropertyAccessor( object, property_list, i )
 
@@ -300,16 +427,26 @@ classdef csm_object_converter
 
         end
         
-        function [output] = toObject( structure )
+        function [output] = tObject( structure )
+            
+            
                         
             % If its a normal datatype (Single), just return the value
-            if csm_object_converter.isSingleDatatype( structure ) || csm_object_converter.inIgnoreList( structure )
+            if csm_object_converter.isSingleDatatype( structure )
 
                 output = structure;
 
                 return;
 
             end
+            
+            if csm_object_converter.inIgnoreList( structure )
+                
+               output = structure;
+               
+               re
+                
+            end    
             
             % If it's a struct, loop over it like a struct
             if isstruct( structure )
@@ -319,16 +456,8 @@ classdef csm_object_converter
                 is_object = false;
 
                 if isfield(structure,'csm_subclass_info')
-                    
-                    if strcmp(structure.csm_class_type,'csm_import_raw_nmr')
-                        
-                        eval( strcat( 'output = ', structure.csm_class_type ,'("build_empty_object",true);'));
-                    
-                    else
-                        
-                        eval( strcat( 'output = ', structure.csm_class_type ,'();'));
-                   
-                    end
+                
+                    eval( strcat( 'output = ', structure.csm_class_type ,'();'));
                     
                     is_object = true;
                 
@@ -344,11 +473,11 @@ classdef csm_object_converter
 
                         temp_output = csm_object_converter.tObject( structure.(fields{i}));
                     
-                        disp(fields{i});
+                        %disp(fields{i});
                         
-                        if strcmp(fields{i},'Quantile')
-                            break_here = 1;
-                        end    
+                      %  if strcmp(fields{i},'Name')
+                     %       break_here = 1;
+                      %  end    
                          
                         if is_object
                             

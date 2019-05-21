@@ -1,0 +1,56 @@
+***Estimation and cross-validation of O2PLS model***
+
+model=mjrMainO2pls(X,Y,A,oax,oay,nrcv,cvType,centerType,scaleType,cvFrac,modelType,orth_plsType)
+
+ARGS:
+% X= X matrix (features), rows are observations, columns are features
+% Y= Y matrix/vector (predictors), rows are observations, columns are
+%           features
+% A= number predictive components (integer)
+% oax= number of Y-orthogonal components (orth. comps in X)  (integer)
+% oay= number of X-orthogonal components (orth. comps in Y)   (integer)
+% nrcv= number of cross-validation rounds (integer)
+% cvType = 'nfold' for n-fold, 'mccv' for monte-carlo, 'mccvb' for monte-carlo class -balanced
+% centerType = 'mc' for meancentering, 'no' for no centering
+% scaleType = 'uv' for scaling to unit variance, 'A' for Areto, 'no' for no scaling
+% cvFrac = fraction of samples used for modelling (if cvType is 'mc' or 'mb' - otherwise not used
+% modelType = 'da' for discriminant analysis, 're' for regression - if 'da'
+%               sensitivity and specificity will be calculated
+% orth_plsType = 'large' for approximation of predictive weights in case of large Y matrix, or 'standard'
+% for the normal OrthPLS algorithm
+
+Return: model object (struct) containing 
+.da - if model is of modelType='da' (discriminant analysis) - contains sensitivity / specificity info and confusion matrix etc.
+.o2plsMode = the full o2pls model with all it's paramters
+.cv = cross-validation results, such as Q^2 values, Yhat etc etc...
+.release = version information
+
+Examples:
+3 pred comps, 2 Y-orth, 0 X-orth, 10-cv rounds, class balance monte-carlo cv, meacenter data, uv-scale data, 2/3 of samples as trainng set, discriminant analysis, regular estimation of Wp
+model=mjrMainO2pls(X,Y,3,2,0,10,'mccvb','mc','uv',2/3,'da','standard')
+
+3 pred comps, 2 Y-orth, 1 X-orth, 10-cv rounds,nfold cv, meacenter data,no scaling, *not used for nfold* [] of samples as trainng set, regresion analysis, Wp estimation for large Y matrices
+model=mjrMainO2pls(X,Y,3,2,1,10,'nfold','mc','no',[],'re','large')
+
+
+***Summary plot(s) of results***
+
+[corrVect,covVect]=mjrO2plsSummaryPlot(model,X,Y,xlabels);
+ARGS:
+model = model from mjrMaino2pls
+X=X matrix
+Y=Y matrix
+xlabels= x scale (e.g. ppm)
+
+return:
+corr,cov vectors as
+
+If 'da' model:
+plots sensitivity, specificity, orth_pls coefficients (colorplot a'la cloarec), Q2,R2, confusion matrix
+
+else:
+Q2Yhat and Q2Xhat for each variable in X and Y block as well as general stats Q2,R2 etc.
+
+
+Example:
+mjrO2plsSummaryPlot(model,X,Y,ppm);
